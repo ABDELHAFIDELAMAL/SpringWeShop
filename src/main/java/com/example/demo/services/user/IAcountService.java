@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IAcountService {
     List<AppUser> readUsers();
-    AppUser createUser();
+    AppUser createUser(AppUser user);
     void deleteUser(Long id );
     AppUser updateUser(AppUser appUser , Long id);
 }
