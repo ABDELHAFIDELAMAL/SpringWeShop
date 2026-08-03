@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-
 import com.example.demo.entities.Category;
 import com.example.demo.exception.AllreadyExistException;
 import com.example.demo.response.ApiResponse;
