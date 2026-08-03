@@ -20,7 +20,7 @@ public class DemoApplication {
 	}
 
 	@Bean
-	PasswordEncoder passwordEncoder(){
+	 PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
 
@@ -31,7 +31,7 @@ public class DemoApplication {
 			ImageRepository imageRepository
 	){
 		return args -> {
-
+			System.out.println("chakib est : " + passwordEncoder().encode("chakib") );
 		};
 	}
 
