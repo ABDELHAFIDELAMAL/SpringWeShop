@@ -1,4 +1,4 @@
 package com.example.demo.controllers.review;
 
-public class Review {
+public class ReviewController {
 }
