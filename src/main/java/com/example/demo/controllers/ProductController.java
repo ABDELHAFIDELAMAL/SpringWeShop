@@ -16,13 +16,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "${api.prefix}/products")
-@CrossOrigin(origins = "http://localhost:5173") // 👈 تفعيل CORS لـ React
 public class ProductController {
 
     @Autowired
     private IProductService productService;
 
-    // 1. Get All Products
+
     @GetMapping(path = "/all")
     public ResponseEntity<ApiResponse> getAllProducts() {
         try {
@@ -34,7 +33,6 @@ public class ProductController {
         }
     }
 
-    // 2. Get Product By ID
     @GetMapping(path = "/{productId}/product")
     public ResponseEntity<ApiResponse> getProductById(@PathVariable Long productId) {
         try {
@@ -46,7 +44,6 @@ public class ProductController {
         }
     }
 
-    // 3. Get Product By Name
     @GetMapping(path = "/by-name")
     public ResponseEntity<ApiResponse> getProductByName(@RequestParam String name) {
         try {
@@ -58,7 +55,6 @@ public class ProductController {
         }
     }
 
-    // 4. Get Product By Brand
     @GetMapping(path = "/by-brand")
     public ResponseEntity<ApiResponse> getProductByBrand(@RequestParam String brand) {
         try {
@@ -70,7 +66,6 @@ public class ProductController {
         }
     }
 
-    // 5. Get Product By Category
     @GetMapping(path = "/by-category")
     public ResponseEntity<ApiResponse> getProductByCategory(@RequestParam String category) {
         try {
