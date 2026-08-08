@@ -36,7 +36,7 @@ public class DemoApplication {
 	) {
 		return args -> {
 			System.out.println("Server running on http://localhost:8080/api/v1/products/all");
-			System.out.println("chakib encoded: " + passwordEncoder.encode("chakib"));
+			System.out.println("hello encoded: " + passwordEncoder.encode("hello"));
 
 		};
 	}
