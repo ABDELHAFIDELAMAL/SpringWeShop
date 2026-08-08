@@ -1,8 +1,10 @@
 package com.example.demo.entities;
 
+import com.example.demo.entities.review.Review;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,6 +25,9 @@ public class Product {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category ;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
     public Product(String name, String description, Double price, String brand, int quantity , Category category) {
         this.name = name;
