@@ -1,16 +1,21 @@
 package com.example.demo.services.review;
 
 import com.example.demo.entities.review.Review;
+import com.example.demo.repositories.ProductRepository;
 import com.example.demo.repositories.review.ReviewRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ReviewService implements IReviewService{
     @Autowired
     private ReviewRepository reviewRepository ;
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     public List<Review> getAllReviews() {
@@ -19,41 +24,51 @@ public class ReviewService implements IReviewService{
 
     @Override
     public Review addReview(Review review) {
-        return null;
+        return reviewRepository.save(review);
     }
 
     @Override
     public Review getReviewById(Long id) {
-        return null;
+        return reviewRepository.findById(id).
+                orElseThrow(()->new RuntimeException("Review not found with id :" + id));
     }
+
 
     @Override
     public List<Review> getReviewsByProductId(Long productId) {
-        return List.of();
+        return reviewRepository.findByProductId(productId);
     }
 
     @Override
     public List<Review> getReviewsByUserId(Long userId) {
-        return List.of();
+        return reviewRepository.findByAppUserId(userId);
     }
 
     @Override
-    public Review updateReview(Long id, Review review) {
-        return null;
+    public Review updateReview(Long id, Review updatedReview) {
+        Review existingReview = reviewRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Review not found with id: " + id));
+        existingReview.setRating(updatedReview.getRating());
+        existingReview.setComment(updatedReview.getComment());
+        return reviewRepository.save(existingReview);
     }
 
     @Override
     public void deleteReview(Long id) {
-
+        if (!reviewRepository.existsById(id)) {
+            throw new RuntimeException("Cannot delete. Review not found with id: " + id);
+        }
+        reviewRepository.deleteById(id);
     }
 
     @Override
     public Double getAverageRatingByProductId(Long productId) {
-        return 0.0;
+        Double avgRating = reviewRepository.findAverageRatingByProductId(productId);
+        return (avgRating != null) ? avgRating : 0.0;
     }
 
     @Override
     public long getReviewCountByProductId(Long productId) {
-        return 0;
+        return reviewRepository.countByProductId(productId);
     }
 }
