@@ -31,12 +31,11 @@ public class DemoApplication {
 			ProductRepository productRepository,
 			CategoryRepository categoryRepository,
 			ImageRepository imageRepository,
-			IAcountService acountService,
-			PasswordEncoder passwordEncoder
+			IAcountService acountService
 	) {
 		return args -> {
 			System.out.println("Server running on http://localhost:8080/api/v1/products/all");
-			System.out.println("hello encoded: " + passwordEncoder.encode("hello"));
+			System.out.println("hello encoded: " + passwordEncoder().encode("hello"));
 
 		};
 	}

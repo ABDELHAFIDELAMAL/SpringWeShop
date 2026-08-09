@@ -27,7 +27,7 @@ public class SecurityConfigue {
     public SecurityFilterChain firstSecurity(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/api/v1/products/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/products/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/products/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/products/**").hasRole("ADMIN")
