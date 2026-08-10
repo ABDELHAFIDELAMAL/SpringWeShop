@@ -17,9 +17,8 @@ public class ReviewController  {
     private IReviewService reviewService ;
 
     @GetMapping(path = "/all")
-    public ResponseEntity<ApiResponse> getAllReviews() {
-        var data = reviewService.getAllReviews();
-        return ResponseEntity.ok(new ApiResponse("Seccess" , data)) ;
+    public List<Review> getAllReviews() {
+        return reviewService.getAllReviews();
     }
 
 
