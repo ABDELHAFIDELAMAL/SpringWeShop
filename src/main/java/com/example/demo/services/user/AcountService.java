@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -70,5 +72,40 @@ public class AcountService implements IAcountService {
         return userRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("User not found with id: " + id)
         );
+    }
+
+    @Override
+    public AppUser updateUserRole(Long userId, AppUserRole role) {
+        try{
+            AppUser user = userRepository.findById(userId).orElseThrow(()->new RuntimeException("User not found with id :" + userId));
+            Set<AppUserRole> roles = (Set<AppUserRole>) user.getRoles();
+            for( AppUserRole role1 : roles){
+                if(Objects.equals(role1.getId(), role.getId())){
+                    role1.setUserRole(role.getUserRole());
+                    role1.setAppUserList(role.getAppUserList());
+                }
+            }
+            user.setRoles(roles);
+            return userRepository.save(user);
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public AppUser updateUser(Long id, AppUser appUser) {
+        try{
+            AppUser user = userRepository.findById(id).orElseThrow(()->new RuntimeException("User not found with id :" + id));
+            user.setUsername(appUser.getUsername());
+            user.setEmail(appUser.getEmail());
+            user.setPassword(appUser.getPassword());
+            user.setReviews(appUser.getReviews());
+            user.setRoles(appUser.getRoles());
+            userRepository.save(user);
+            System.out.println("User update Seccess Full");
+            return user;
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -15,4 +15,6 @@ public interface IAcountService {
     List<AppUser> findAllUsers();
     List<AppUserRole> getAllRoles();
     AppUser findUserById(Long id);
+    AppUser updateUserRole(Long userId , AppUserRole role);
+    AppUser updateUser(Long id , AppUser appUser);
 }

@@ -19,4 +19,8 @@ public class AppUserRole {
     private UserRole userRole ;
     @ManyToMany
     private List<AppUser> appUserList ;
+
+    public AppUserRole(UserRole userRole) {
+        this.userRole = userRole ;
+    }
 }
