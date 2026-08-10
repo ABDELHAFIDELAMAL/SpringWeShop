@@ -1,18 +1,25 @@
 package com.example.demo;
 
+import com.example.demo.entities.Category;
+import com.example.demo.entities.Product;
+import com.example.demo.entities.review.Review;
 import com.example.demo.entities.user.AppUser;
 import com.example.demo.entities.user.AppUserRole;
 import com.example.demo.entities.user.UserRole;
 import com.example.demo.repositories.CategoryRepository;
 import com.example.demo.repositories.ImageRepository;
 import com.example.demo.repositories.ProductRepository;
-import com.example.demo.services.user.IAcountService;
+import com.example.demo.repositories.review.ReviewRepository;
+import com.example.demo.repositories.user.AppUserRepository;
+import com.example.demo.repositories.user.AppUserRoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class DemoApplication {
@@ -31,11 +38,13 @@ public class DemoApplication {
 			ProductRepository productRepository,
 			CategoryRepository categoryRepository,
 			ImageRepository imageRepository,
-			IAcountService acountService
+			AppUserRepository userRepository,
+			ReviewRepository reviewRepository,
+			AppUserRoleRepository roleRepository,
+			PasswordEncoder passwordEncoder
 	) {
 		return args -> {
 			System.out.println("Server running on http://localhost:8080/api/v1/products/all");
-			System.out.println("hello encoded: " + passwordEncoder().encode("hello"));
 
 		};
 	}

@@ -55,4 +55,10 @@ public class AppUser {
     @JsonIgnore
     @Builder.Default
     private List<Review> reviews = new ArrayList<>();
+
+    public AppUser(AppUserRole role){
+        this.roles.add(role);
+    }
+
+
 }

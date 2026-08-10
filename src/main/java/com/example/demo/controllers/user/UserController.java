@@ -18,7 +18,6 @@ public class UserController {
 
     private final IAcountService acountService;
 
-
     @PostMapping("/roles/add")
     public ResponseEntity<AppUserRole> addNewRole(@RequestBody AppUserRole role) {
         return new ResponseEntity<>(acountService.addNewRole(role), HttpStatus.CREATED);
@@ -61,5 +60,14 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<AppUser> findUserById(@PathVariable Long id) {
         return ResponseEntity.ok(acountService.findUserById(id));
+    }
+
+    @PostMapping(path = "/user/{id}/update")
+    public ResponseEntity<AppUser> updateUser(@PathVariable Long id ,@RequestBody AppUser user){
+        return ResponseEntity.ok(acountService.updateUser(id , user));
+    }
+    @PostMapping(path = "/role/{id}/update")
+    public ResponseEntity<AppUser> updateUserRole(@PathVariable Long id ,@RequestBody AppUserRole role){
+        return ResponseEntity.ok(acountService.updateUserRole(id , role));
     }
 }

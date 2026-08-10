@@ -11,8 +11,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Setter
-@Getter
+@Setter @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"product", "appUser"})
