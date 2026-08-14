@@ -42,23 +42,14 @@ public class AppUser {
     @Column(unique = true, nullable = false)
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles_junction",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    @Builder.Default
-    private Set<AppUserRole> roles = new HashSet<>();
+    @Enumerated(EnumType.STRING)
+    @Column(unique = true, nullable = false)
+    private Set<UserRole> userRoles = new HashSet<>() ;
 
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
     @JsonIgnore
     @Builder.Default
     private List<Review> reviews = new ArrayList<>();
-
-    public AppUser(AppUserRole role){
-        this.roles.add(role);
-    }
 
 
 }

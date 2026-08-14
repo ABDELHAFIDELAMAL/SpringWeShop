@@ -1,7 +1,6 @@
 package com.example.demo.controllers.user;
 
 import com.example.demo.entities.user.AppUser;
-import com.example.demo.entities.user.AppUserRole;
 import com.example.demo.entities.user.UserRole;
 import com.example.demo.services.user.IAcountService;
 import lombok.RequiredArgsConstructor;
