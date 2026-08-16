@@ -1,7 +1,6 @@
 package com.example.demo.controllers.user;
 
 import com.example.demo.entities.user.AppUser;
-import com.example.demo.entities.user.AppUserRole;
 import com.example.demo.entities.user.UserRole;
 import com.example.demo.services.user.IAcountService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,7 @@ public class UserController {
     private final IAcountService acountService;
 
     @PostMapping("/roles/add")
-    public ResponseEntity<AppUserRole> addNewRole(@RequestBody AppUserRole role) {
+    public ResponseEntity<UserRole> addNewRole(@RequestBody UserRole role) {
         return new ResponseEntity<>(acountService.addNewRole(role), HttpStatus.CREATED);
     }
 
@@ -53,7 +52,7 @@ public class UserController {
     }
 
     @GetMapping("/roles/all")
-    public ResponseEntity<List<AppUserRole>> getAllRoles() {
+    public ResponseEntity<List<UserRole>> getAllRoles() {
         return ResponseEntity.ok(acountService.getAllRoles());
     }
 
@@ -67,7 +66,7 @@ public class UserController {
         return ResponseEntity.ok(acountService.updateUser(id , user));
     }
     @PostMapping(path = "/role/{id}/update")
-    public ResponseEntity<AppUser> updateUserRole(@PathVariable Long id ,@RequestBody AppUserRole role){
+    public ResponseEntity<AppUser> updateUserRole(@PathVariable Long id ,@RequestBody UserRole role){
         return ResponseEntity.ok(acountService.updateUserRole(id , role));
     }
 }
